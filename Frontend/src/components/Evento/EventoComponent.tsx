@@ -4,7 +4,7 @@ function EventoComponent(){
     return (
         <div id="maps-container">
             <p>Gostaríamos muito de contar com a presença de todos vocês neste momento tão especial, 
-                em que celebrarei meus 15 anos com muita alegria e gratidão! Contamos com vocês 
+                em que celebrarei meus 15 anos com muita alegria e gratidão! Contamos com vocês
                 <br/> 
                 <strong>Às 21h</strong> 
                 <br/>
