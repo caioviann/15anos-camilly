@@ -1,6 +1,13 @@
 package ProjectCamilly.project15years.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "invited")
 public class Invited {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String InvitedName;
     private int numberFamily;
     private boolean confirmed;
