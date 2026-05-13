@@ -8,41 +8,33 @@ public class Invited {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String InvitedName;
-    private int numberFamily;
-    private boolean confirmed;
+    @Column(name = "invited_name")
+    private String invitedName;
+    @Column(nullable = true)
+    private Boolean confirmed;
 
     public Invited(){
 
     }
 
-    public Invited(String invitedName, int numberFamily, boolean confirmed) {
-        InvitedName = invitedName;
-        this.numberFamily = numberFamily;
+    public Invited(String invitedName, Boolean confirmed) {
+        this.invitedName = invitedName;
         this.confirmed = confirmed;
     }
 
     public String getInvitedName() {
-        return InvitedName;
+        return invitedName;
     }
 
     public void setInvitedName(String invitedName) {
-        InvitedName = invitedName;
-    }
-
-    public int getNumberFamily() {
-        return numberFamily;
-    }
-
-    public void setNumberFamily(int numberFamily) {
-        this.numberFamily = numberFamily;
+        this.invitedName = invitedName;
     }
 
     public boolean isConfirmed() {
         return confirmed;
     }
 
-    public void setConfirmed(boolean confirmed) {
+    public void setConfirmed(Boolean confirmed) {
         this.confirmed = confirmed;
     }
 }

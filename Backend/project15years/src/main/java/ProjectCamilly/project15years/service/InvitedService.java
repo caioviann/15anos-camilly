@@ -17,4 +17,7 @@ public class InvitedService {
     public List<Invited> invitedList(){
         return repository.findAll();
     }
+    public void invitedSave(Invited invited){
+        repository.save(invited);
+    }
 }
