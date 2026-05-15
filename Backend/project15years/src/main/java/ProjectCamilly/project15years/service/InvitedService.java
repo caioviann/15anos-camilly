@@ -20,4 +20,9 @@ public class InvitedService {
     public void invitedSave(Invited invited){
         repository.save(invited);
     }
+    public Invited invitedFindById(Long id){
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Convidado não encontrado."));
+
+    }
 }

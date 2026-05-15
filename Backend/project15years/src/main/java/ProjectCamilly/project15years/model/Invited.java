@@ -30,7 +30,7 @@ public class Invited {
         this.invitedName = invitedName;
     }
 
-    public boolean isConfirmed() {
+    public Boolean getConfirmed() {
         return confirmed;
     }
 
