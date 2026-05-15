@@ -8,7 +8,7 @@ function NavbarComponent() {
         { label: "Home", href: "#logo-container" },
         { label: "Sobre", href: "#sobre" },
         { label: "Recepção", href: "#maps-container" },
-        { label: "Lista de Presentes", href: "#lista-de-presentes" },
+        { label: "Lista de Presentes", href: "#presentes" },
         { label: "Confirme sua Presença", href: "#confirme-presenca" },
         { label: "Recados", href: "#recados" },
     ]

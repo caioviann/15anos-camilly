@@ -4,6 +4,7 @@ import LogoComponent from './components/Logo/LogoComponent.tsx'
 import NavbarComponent from './components/Navbar/NavbarComponent.tsx'
 import SobreComponent from './components/Sobre/SobreComponent.tsx'
 import TimeComponent from './components/Time/TimeComponent.tsx'
+import PresentesComponent from './components/Presentes/PresentesComponent.tsx'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <TimeComponent />
       <SobreComponent />
       <EventoComponent />
+      <PresentesComponent />
     </div>
   )
 }
