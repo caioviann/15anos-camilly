@@ -27,12 +27,12 @@ const presentItems = [
   { label: "Maquiagem", image: maquiagemImg, price: "R$ 270,00" },
   { label: "Pelúcias Disney", image: peluciasDisneyImg, price: "R$ 280,00" },
   { label: "Perfumes", image: perfumesImg, price: "R$ 250,00" },
-  { label: "PIX (você escolhe o valor)", image: pixImg, price: "Valor Livre." },
+  { label: "PIX (você escolhe o valor)", image: pixImg, price: "" },
   { label: "Produtos de Cabelo", image: produtosDeCabeloImg, price: "R$ 150,00" },
   { label: "Produtos de Skincare", image: produtosDeSkinCareImg, price: "R$ 180,00" },
   { label: "Roupas de Inverno", image: roupasDeInvernoImg, price: "R$ 250,00" },
   { label: "Roupas de Verão", image: roupasDeVeraoImg, price: "R$ 100,00" },
-  { label: "Tênis", image: tenisImg, price: "R$ 00,00" },
+  { label: "Tênis", image: tenisImg, price: "R$ 400,00" },
 ]
 
 function PresentesComponent() {

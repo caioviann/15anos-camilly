@@ -15,7 +15,7 @@ function EventoComponent(){
                 width="600" 
                 height="450" 
                 style={{ border: "0" }} 
-                allowFullScreen="" 
+                allowFullScreen={false}
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Local da festa"
