@@ -15,6 +15,7 @@
 .sobre-photo-wrapper {
     flex-shrink: 0;
     position: relative;
+    align-self: flex-start;
 }
 
 .sobre-photo-wrapper::before {
@@ -35,6 +36,7 @@
     width: 280px;
     height: 280px;
     object-fit: cover;
+    object-position: center top;
     border-radius: 50%;
     border: 4px solid #fff;
     box-shadow: 0 8px 32px rgba(200, 70, 120, 0.2);
