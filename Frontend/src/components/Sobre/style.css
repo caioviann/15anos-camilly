@@ -94,6 +94,10 @@
         gap: 2rem;
     }
 
+    .sobre-photo-wrapper {
+        align-self: center;
+    }
+
     .sobre-photo {
         width: 220px;
         height: 220px;
@@ -116,6 +120,10 @@
 @media (max-width: 420px) {
     #sobre {
         padding: 2rem 1rem;
+    }
+
+    .sobre-photo-wrapper {
+        align-self: center;
     }
 
     .sobre-photo {
