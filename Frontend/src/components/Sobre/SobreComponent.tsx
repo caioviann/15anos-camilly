@@ -1,5 +1,5 @@
 import "./style.css"
-import aniversarianteImg from "../../assets/aniversariante.png"
+import aniversarianteImg from "../../assets/Aniversariante.jpeg"
 
 function SobreComponent() {
     return (
