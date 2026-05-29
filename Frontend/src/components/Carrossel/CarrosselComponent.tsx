@@ -36,7 +36,6 @@ const fotos = [
 
 function CarrosselComponent() {
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [touchStart, setTouchStart] = useState<number | null>(null)
 
     const proximo = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % fotos.length)
@@ -50,23 +49,7 @@ function CarrosselComponent() {
         setCurrentIndex(index)
     }
 
-    const handleTouchStart = (e: React.TouchEvent) => {
-        setTouchStart(e.targetTouches[0].clientX)
-    }
 
-    const handleTouchEnd = (e: React.TouchEvent) => {
-        if (touchStart !== null && e.changedTouches.length > 0) {
-            const distancia = touchStart - e.changedTouches[0].clientX
-            
-            if (distancia > 50) {
-                proximo()
-            } else if (distancia < -50) {
-                anterior()
-            }
-            
-            setTouchStart(null)
-        }
-    }
 
     return (
         <section id="carrossel">
@@ -77,11 +60,7 @@ function CarrosselComponent() {
                     ❮
                 </button>
 
-                <div 
-                    className="carrossel-slide"
-                    onTouchStart={handleTouchStart}
-                    onTouchEnd={handleTouchEnd}
-                >
+                <div className="carrossel-slide">
                     <img
                         src={fotos[currentIndex].imagem}
                         alt={fotos[currentIndex].idade}
