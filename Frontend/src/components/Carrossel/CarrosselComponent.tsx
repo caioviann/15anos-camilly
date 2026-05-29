@@ -37,7 +37,6 @@ const fotos = [
 function CarrosselComponent() {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [touchStart, setTouchStart] = useState<number | null>(null)
-    const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
     const proximo = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % fotos.length)
@@ -56,8 +55,6 @@ function CarrosselComponent() {
     }
 
     const handleTouchEnd = (e: React.TouchEvent) => {
-        setTouchEnd(e.changedTouches[0].clientX)
-        
         if (touchStart !== null) {
             const distancia = touchStart - e.changedTouches[0].clientX
             
