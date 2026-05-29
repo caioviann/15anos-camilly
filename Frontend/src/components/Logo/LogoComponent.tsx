@@ -1,5 +1,5 @@
 import "./style.css"
-import logo from "../../assets/logoCamilly-removebg-preview.png"
+import logo from "../../assets/logoCamilly.png"
 
 function LogoComponent() {
     return (
