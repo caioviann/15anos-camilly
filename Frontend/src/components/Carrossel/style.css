@@ -59,6 +59,9 @@
     align-items: center;
     gap: 1.5rem;
     min-width: 300px;
+    touch-action: pan-y;
+    user-select: none;
+    cursor: grab;
 }
 
 .carrossel-imagem {
@@ -69,6 +72,8 @@
     border: 4px solid #e86ca5;
     box-shadow: 0 8px 32px rgba(200, 70, 120, 0.25);
     animation: fadeIn 0.4s ease;
+    pointer-events: none;
+    -webkit-user-drag: none;
 }
 
 @keyframes fadeIn {
@@ -147,6 +152,7 @@
     .carrossel-slide {
         min-width: 250px;
         gap: 1rem;
+        touch-action: pan-y;
     }
 
     .carrossel-imagem {
@@ -180,6 +186,7 @@
     .carrossel-slide {
         min-width: 100%;
         gap: 1rem;
+        touch-action: pan-y;
     }
 
     .carrossel-imagem {

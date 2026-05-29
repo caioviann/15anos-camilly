@@ -55,7 +55,7 @@ function CarrosselComponent() {
     }
 
     const handleTouchEnd = (e: React.TouchEvent) => {
-        if (touchStart !== null) {
+        if (touchStart !== null && e.changedTouches.length > 0) {
             const distancia = touchStart - e.changedTouches[0].clientX
             
             if (distancia > 50) {
@@ -63,6 +63,8 @@ function CarrosselComponent() {
             } else if (distancia < -50) {
                 anterior()
             }
+            
+            setTouchStart(null)
         }
     }
 
