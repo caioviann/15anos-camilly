@@ -19,8 +19,8 @@ export default function PaymentModal({ item, onClose }: Props) {
   function choose(method: 'pix' | 'card') {
     if (method === 'card') {
       if (item.paymentUrl) {
-        // open external infinite pay link
-        window.location.href = item.paymentUrl
+        // open external infinite pay link in a new tab
+        window.open(item.paymentUrl, '_blank', 'noopener,noreferrer')
         return
       }
       const params = new URLSearchParams({ method, item: item.label })

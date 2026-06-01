@@ -1,6 +1,6 @@
 import "./style.css"
 import { useState } from 'react'
-import PaymentModal from './PaymentModal'
+import PaymentModal from './PaymentModal.tsx'
 import acessoriosImg from "../../assets/presentes/Acessorios.jpeg"
 import ajudeNaViagemImg from "../../assets/presentes/AjudeNaViagem.jpeg"
 import bolsasImg from "../../assets/presentes/Bolsas.jpeg"
