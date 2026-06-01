@@ -17,7 +17,7 @@ export default function ConfirmacaoComponent() {
   async function loadAllGuests() {
     setLoading(true)
     try {
-      const res = await searchGuests('')
+      const res = await searchGuests()
       const pending = res.filter((g) => g.confirmed === null)
       setAllGuests(pending)
       setResults(pending)
