@@ -44,7 +44,6 @@ function PresentesComponent() {
           <h2 className="presentes-title">Presentes que ajudam a tornar este dia ainda mais especial</h2>
         </div>
         <div className="presentes-toolbar">
-          <span className="presentes-cart">Carrinho vazio</span>
           <div className="presentes-sort">
             <span>Ordenar lista por:</span>
             <select aria-label="Ordenar presentes">

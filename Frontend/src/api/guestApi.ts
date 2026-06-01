@@ -4,14 +4,20 @@ export type Guest = {
   confirmed: boolean | null
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, '') ?? ''
+
+function apiUrl(path: string) {
+  return `${API_BASE_URL}${path}`
+}
+
 export async function searchGuests(query: string): Promise<Guest[]> {
-  const res = await fetch(`/invited?search=${encodeURIComponent(query)}`)
+  const res = await fetch(apiUrl(`/invited?search=${encodeURIComponent(query)}`))
   if (!res.ok) throw new Error('Erro ao buscar convidados')
   return res.json()
 }
 
 export async function sendRsvp(payload: { ids: string[]; attending: boolean }) {
-  const res = await fetch('/invited', {
+  const res = await fetch(apiUrl('/invited'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -22,7 +28,7 @@ export async function sendRsvp(payload: { ids: string[]; attending: boolean }) {
 
 export async function patchInvite(payload: { id: number; confirmed: boolean }) {
   if (payload.id == null) throw new Error('ID is required for PATCH /invited/{id}')
-  const res = await fetch(`/invited/${encodeURIComponent(String(payload.id))}`, {
+  const res = await fetch(apiUrl(`/invited/${encodeURIComponent(String(payload.id))}`), {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ confirmed: payload.confirmed }),
