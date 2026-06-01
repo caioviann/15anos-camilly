@@ -4,14 +4,14 @@ export type Guest = {
   confirmed: boolean | null
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, '') ?? ''
+const API_BASE_URL = "https://one5anos-camilly.onrender.com"
 
 function apiUrl(path: string) {
   return `${API_BASE_URL}${path}`
 }
 
-export async function searchGuests(query: string): Promise<Guest[]> {
-  const res = await fetch(apiUrl(`/invited?search=${encodeURIComponent(query)}`))
+export async function searchGuests(): Promise<Guest[]> {
+  const res = await fetch(apiUrl('/invited'))
   if (!res.ok) throw new Error('Erro ao buscar convidados')
   return res.json()
 }

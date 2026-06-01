@@ -1,4 +1,6 @@
 import "./style.css"
+import { useState } from 'react'
+import PaymentModal from './PaymentModal'
 import acessoriosImg from "../../assets/presentes/Acessorios.jpeg"
 import ajudeNaViagemImg from "../../assets/presentes/AjudeNaViagem.jpeg"
 import bolsasImg from "../../assets/presentes/Bolsas.jpeg"
@@ -36,6 +38,19 @@ const presentItems = [
 ]
 
 function PresentesComponent() {
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<any>(null)
+
+  function openPayment(item: any) {
+    setSelectedItem(item)
+    setModalOpen(true)
+  }
+
+  function closePayment() {
+    setSelectedItem(null)
+    setModalOpen(false)
+  }
+
   return (
     <section id="presentes">
       <div className="presentes-header">
@@ -63,11 +78,15 @@ function PresentesComponent() {
             <div className="presentes-card-body">
               <span>{item.label}</span>
               <span className="presentes-price">{item.price}</span>
-              <button className="button-presentear" type="button">Presentear</button>
+              <button className="button-presentear" type="button" onClick={() => openPayment(item)}>Presentear</button>
             </div>
           </article>
         ))}
       </div>
+
+      {modalOpen && selectedItem && (
+        <PaymentModal item={selectedItem} onClose={closePayment} />
+      )}
     </section>
   )
 }
