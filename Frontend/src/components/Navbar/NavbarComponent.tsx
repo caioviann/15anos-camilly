@@ -9,7 +9,7 @@ function NavbarComponent() {
         { label: "Sobre", href: "#sobre" },
         { label: "Recepção", href: "#maps-container" },
         { label: "Lista de Presentes", href: "#presentes" },
-        { label: "Confirme sua Presença", href: "#confirme-presenca" },
+        { label: "Confirme sua Presença", href: "#confirmacao" },
         { label: "Recados", href: "#recados" },
     ]
 
