@@ -23,14 +23,16 @@ export default function PaymentModal({ item, onClose }: Props) {
         return
       }
       const params = new URLSearchParams({ method, item: item.label })
-      window.location.href = `/pagamento?${params.toString()}`
+      if (item.price) params.set('price', item.price)
+      window.location.href = `/pagamento.html?${params.toString()}`
       return
     }
 
     const params = new URLSearchParams({ method, item: item.label })
-    if (item.pixKey) params.set('pixKey', item.pixKey)
+    if (item.price) params.set('price', item.price)
     if (item.pixImage) params.set('pixImage', item.pixImage)
-    window.location.href = `/pagamento?${params.toString()}`
+    if (item.pixKey) params.set('pixKey', item.pixKey)
+    window.location.href = `/pagamento.html?${params.toString()}`
   }
 
   return (

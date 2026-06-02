@@ -94,7 +94,7 @@ export default function ConfirmacaoComponent() {
   }
 
   return (
-    <section className="confirmacao">
+    <section className="confirmacao" id="confirmacao">
       <h2>Confirmação de presença</h2>
       <div className="searchRow">
         <input

@@ -14,6 +14,10 @@
       .btn { padding:0.7rem 1.1rem; border-radius:8px; border:none; cursor:pointer; font-weight:700 }
       .btn-primary { background:rgba(180,60,100,0.9); color:#fff }
       .btn-ghost { background:transparent; color:#6f5f7b }
+      .pix-key-box { margin-top:1.2rem; display:flex; flex-direction:column; gap:0.5rem; }
+      .pix-key-box label { color:#6f5f7b; font-size:0.95rem; }
+      .pix-code { width:100%; padding:0.8rem; border-radius:10px; border:1px solid #d8cfd9; background:#faf6fb; color:#2f2641; font-size:0.95rem; }
+      .pix-code:focus { outline:none; border-color:rgba(180,60,100,0.9); }
       .note { color:#6f5f7b; text-align:center; margin-top:1rem }
     </style>
   </head>
@@ -30,6 +34,7 @@
       const params = new URLSearchParams(location.search)
       const method = params.get('method')
       const item = params.get('item')
+      const price = params.get('price')
       const paymentUrl = params.get('paymentUrl')
       const pixKey = params.get('pixKey')
       const pixImage = params.get('pixImage')
@@ -40,35 +45,29 @@
 
       if (method === 'card') {
         if (paymentUrl) {
-          // redirect to external payment link
           window.location.href = decodeURIComponent(paymentUrl)
         } else {
           content.innerHTML = `\n            <p>Nenhum link de pagamento fornecido para cartão.</p>\n            <p>Item: <strong>${escapeHtml(item)}</strong></p>\n          `
         }
       } else if (method === 'pix') {
-        let html = `<p>Pagamento via PIX</p>`
-        if (item) html += `<p>Item: <strong>${escapeHtml(item)}</strong></p>`
+        let html = `\n          <p>Pagamento via PIX</p>\n`
+        if (item) html += `\n          <p>Item: <strong>${escapeHtml(item)}</strong></p>\n`
+        if (price) html += `\n          <p>Valor: <strong>${escapeHtml(price)}</strong></p>\n`
         if (pixImage) {
-          // pixImage expected to be a path relative to root, e.g. /pix-qr.png
-          html += `<img class="qr" src="${escapeHtml(pixImage)}" alt="QR code PIX" />`
+          html += `\n            <img class=\"qr\" src=\"${escapeHtml(pixImage)}\" alt=\"QR code PIX\" />\n`
         }
-        if (pixKey) {
-          const safeKey = escapeHtml(pixKey)
-          html += `<div class="pix-key" id="pixKey">${safeKey}</div>`
-          html += `<div class="actions">\n<button class=\"btn btn-primary\" id=\"copyBtn\">Copiar chave PIX</button>\n<button class=\"btn btn-ghost\" id=\"closeBtn\">Voltar</button>\n</div>`
-        } else {
-          html += `<div class=\"actions\">\n<button class=\"btn btn-ghost\" id=\"closeBtn\">Voltar</button>\n</div>`
-        }
+        html += `\n          <div class=\"pix-key-box\">\n            <label for=\"pixCode\">Chave PIX</label>\n            <input id=\"pixCode\" class=\"pix-code\" readonly value=\"${escapeHtml(pixKey || '')}\" />\n          </div>\n          <div class=\"actions\">\n            <button class=\"btn btn-primary\" id=\"copyBtn\">Copiar código</button>\n            <button class=\"btn btn-ghost\" id=\"closeBtn\">Voltar</button>\n          </div>\n`
         content.innerHTML = html
 
         const copyBtn = document.getElementById('copyBtn')
-        if (copyBtn) {
+        const pixCode = document.getElementById('pixCode')
+        if (copyBtn && pixCode) {
           copyBtn.addEventListener('click', async () => {
             try {
-              await navigator.clipboard.writeText(pixKey)
+              await navigator.clipboard.writeText(pixCode.value)
               copyBtn.textContent = 'Copiado!'
             } catch (e) {
-              alert('Não foi possível copiar. Copie manualmente: ' + pixKey)
+              alert('Não foi possível copiar. Copie manualmente: ' + pixCode.value)
             }
           })
         }
