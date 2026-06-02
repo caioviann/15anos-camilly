@@ -13,6 +13,7 @@ export default function ConfirmacaoComponent() {
   const [selected, setSelected] = useState<Record<string, boolean>>({})
   const [loading, setLoading] = useState(false)
   const [successModal, setSuccessModal] = useState<{ names: string[]; status: string } | null>(null)
+  const [confirmModal, setConfirmModal] = useState<{ names: string[]; attending: boolean } | null>(null)
 
   async function loadAllGuests() {
     setLoading(true)
@@ -52,10 +53,17 @@ export default function ConfirmacaoComponent() {
     return allGuests.filter((guest) => selected[getGuestKey(guest)])
   }
 
+  function openConfirmModal(attending: boolean) {
+    const guests = getSelectedGuests()
+    if (guests.length === 0) return
+    setConfirmModal({ names: guests.map((g) => g.invitedName), attending })
+  }
+
   async function confirm(attending: boolean) {
     const guests = getSelectedGuests()
     if (guests.length === 0) return
 
+    setConfirmModal(null)
     setLoading(true)
     try {
       const promises = guests.map((g) =>
@@ -122,13 +130,37 @@ export default function ConfirmacaoComponent() {
       )}
 
       <div className="actions">
-        <button className="confirm" onClick={() => confirm(true)} disabled={Object.values(selected).filter(Boolean).length === 0}>
+        <button className="confirm" onClick={() => openConfirmModal(true)} disabled={Object.values(selected).filter(Boolean).length === 0}>
           Confirmar presença
         </button>
-        <button className="decline" onClick={() => confirm(false)} disabled={Object.values(selected).filter(Boolean).length === 0}>
+        <button className="decline" onClick={() => openConfirmModal(false)} disabled={Object.values(selected).filter(Boolean).length === 0}>
           Não vai
         </button>
       </div>
+
+      {confirmModal && (
+        <div className="confirm-modal-overlay">
+          <div className="confirm-modal">
+            <h3>Tem certeza?</h3>
+            <p className="confirm-label">
+              {confirmModal.attending ? 'Confirmar presença de:' : 'Marcar como recusado:'}
+            </p>
+            <ul className="confirm-names">
+              {confirmModal.names.map((name, idx) => (
+                <li key={idx}>{name}</li>
+              ))}
+            </ul>
+            <div className="confirm-actions">
+              <button className="confirm-yes" onClick={() => confirm(confirmModal.attending)}>
+                {confirmModal.attending ? 'Sim, confirmar' : 'Sim, recusar'}
+              </button>
+              <button className="confirm-no" onClick={() => setConfirmModal(null)}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {successModal && (
         <div className="success-modal">
