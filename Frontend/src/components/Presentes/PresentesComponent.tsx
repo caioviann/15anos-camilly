@@ -32,6 +32,8 @@ import pixProdutosDeSkinCare from "../../assets/presentes/QrCode/Pix_ProdutosDeS
 import pixRoupasDeInverno from "../../assets/presentes/QrCode/Pix_RoupasDeInverno.jpeg"
 import pixRoupasDeVerao from "../../assets/presentes/QrCode/Pix_RoupasDeVerao.jpeg"
 import pixTenis from "../../assets/presentes/QrCode/Pix_Tenis.jpeg"
+import pixLivre from "../../assets/presentes/QrCode/Pix_Livre.jpeg"
+
 
 const presentItems = [
   { label: "Acessórios", image: acessoriosImg, price: "R$ 500,00", paymentUrl: "https://link.infinitepay.io/hb202023/VC1D-49zBkAN8eU-500,00", pixImage: pixAcessorios, pixKey: "00020101021126470014br.gov.bcb.pix0111551526782680210Acessorios5204000053039865406500.005802BR5917CAMILLY C N VIANA6008SAO JOSE62070503***63043A76" },
@@ -44,7 +46,7 @@ const presentItems = [
   { label: "Maquiagem", image: maquiagemImg, price: "R$ 270,00", paymentUrl: "https://link.infinitepay.io/hb202023/VC1D-HJUAUPiiP8-270,00", pixImage: pixMaquiagem, pixKey: "00020101021126460014br.gov.bcb.pix0111551526782680209Maquiagem5204000053039865406270.005802BR5917CAMILLY C N VIANA6008SAO JOSE62070503***6304763C" },
   { label: "Pelúcias Disney", image: peluciasDisneyImg, price: "R$ 280,00", paymentUrl: "https://link.infinitepay.io/hb202023/VC1D-zzcNcbD2NN-280,00", pixImage: pixPelucias, pixKey: "00020101021126520014br.gov.bcb.pix0111551526782680215Pelucias Disney5204000053039865406280.005802BR5917CAMILLY C N VIANA6008SAO JOSE62070503***630476A4" },
   { label: "Perfumes", image: perfumesImg, price: "R$ 250,00", paymentUrl: "https://link.infinitepay.io/hb202023/VC1D-6NceJnBYjs-250,00", pixImage: pixPerfumes, pixKey: "00020101021126450014br.gov.bcb.pix0111551526782680208Perfumes5204000053039865406250.005802BR5917CAMILLY C N VIANA6008SAO JOSE62070503***6304FF75" },
-  { label: "PIX (você escolhe o valor)", image: pixImg, price: "", paymentUrl: "", pixImage: "", pixKey: "" },
+  { label: "PIX (você escolhe o valor)", image: pixImg, price: "", pixImage: pixLivre, pixKey: "00020101021126330014br.gov.bcb.pix0111551526782685204000053039865802BR5917CAMILLY C N VIANA6008SAO JOSE62070503***63044EC4" },
   { label: "Produtos de Cabelo", image: produtosDeCabeloImg, price: "R$ 150,00", paymentUrl: "https://link.infinitepay.io/hb202023/VC1D-Yg8APLe5Gf-150,00", pixImage: pixProdutosDeBeleza, pixKey: "00020101021126550014br.gov.bcb.pix0111551526782680218Produtos de cabelo5204000053039865406150.005802BR5917CAMILLY C N VIANA6008SAO JOSE62070503***630432B6" },
   { label: "Produtos de Skincare", image: produtosDeSkinCareImg, price: "R$ 180,00", paymentUrl: "https://link.infinitepay.io/hb202023/VC1D-a8DXc0DXnU-180,00", pixImage: pixProdutosDeSkinCare, pixKey: "00020101021126580014br.gov.bcb.pix0111551526782680221Produtos de Skin Care5204000053039865406180.005802BR5917CAMILLY C N VIANA6008SAO JOSE62070503***6304BC18" },
   { label: "Roupas de Inverno", image: roupasDeInvernoImg, price: "R$ 250,00", paymentUrl: "https://link.infinitepay.io/hb202023/VC1D-rUzk4RyzRa-250,00", pixImage: pixRoupasDeInverno, pixKey: "00020101021126540014br.gov.bcb.pix0111551526782680217Roupas de inverno5204000053039865406250.005802BR5917CAMILLY C N VIANA6008SAO JOSE62070503***630425B9" },
@@ -57,6 +59,16 @@ function PresentesComponent() {
   const [selectedItem, setSelectedItem] = useState<any>(null)
 
   function openPayment(item: any) {
+    const isPixFreeValue = item.label?.toLowerCase().includes('pix (você escolhe o valor)')
+    if (isPixFreeValue) {
+      const params = new URLSearchParams({ method: 'pix', item: item.label })
+      if (item.pixImage) params.set('pixImage', item.pixImage)
+      if (item.pixKey) params.set('pixKey', item.pixKey)
+      if (item.price) params.set('price', item.price)
+      window.location.href = `/pagamento.html?${params.toString()}`
+      return
+    }
+
     setSelectedItem(item)
     setModalOpen(true)
   }
