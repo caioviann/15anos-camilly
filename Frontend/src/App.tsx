@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './App.css'
 import EventoComponent from './components/Evento/EventoComponent.tsx'
 import LogoComponent from './components/Logo/LogoComponent.tsx'
@@ -9,6 +10,21 @@ import TimeComponent from './components/Time/TimeComponent.tsx'
 import PresentesComponent from './components/Presentes/PresentesComponent.tsx'
 
 function App() {
+  useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_URL
+    if (!apiUrl) return
+
+    const wakeBackend = async () => {
+      try {
+        await fetch(apiUrl, { method: 'GET', cache: 'no-store' })
+      } catch (error) {
+        console.warn('Não foi possível acordar o backend:', error)
+      }
+    }
+
+    wakeBackend()
+  }, [])
+
   return (
     <div className="app">
       <NavbarComponent />
