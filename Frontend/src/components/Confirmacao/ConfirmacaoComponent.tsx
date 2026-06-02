@@ -12,7 +12,7 @@ export default function ConfirmacaoComponent() {
   const [results, setResults] = useState<Guest[]>([])
   const [selected, setSelected] = useState<Record<string, boolean>>({})
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState<string | null>(null)
+  const [successModal, setSuccessModal] = useState<{ names: string[]; status: string } | null>(null)
 
   async function loadAllGuests() {
     setLoading(true)
@@ -54,40 +54,27 @@ export default function ConfirmacaoComponent() {
 
   async function confirm(attending: boolean) {
     const guests = getSelectedGuests()
-    if (guests.length === 0) {
-      setMessage('Selecione pelo menos uma pessoa.')
-      return
-    }
-    setMessage(null)
+    if (guests.length === 0) return
+
     setLoading(true)
     try {
       const promises = guests.map((g) =>
-        patchInvite({ id: g.id, confirmed: attending })
-          .then(() => ({ ok: true, guest: g }))
-          .catch((err) => {
-            console.error('Falhou para', g.invitedName, err) // ← veja o erro real
-            return { ok: false, guest: g }
-          })
+        patchInvite({ id: g.id, confirmed: attending }).then(() => g.invitedName)
       )
-      const results = await Promise.all(promises)
-      const succeeded = results.filter((r) => r.ok).map((r) => r.guest.invitedName)
-      const failed = results.filter((r) => !r.ok).map((r) => r.guest.invitedName)
-      let msg = ''
-      if (succeeded.length) msg += `${succeeded.length} confirmados: ${succeeded.join(', ')}. `
-      if (failed.length) msg += `${failed.length} falharam: ${failed.join(', ')}.`
-      setMessage(msg)
-      // clear selection for succeeded
-      setSelected((s) => {
-        const next = { ...s }
-        results.forEach((r) => {
-          if (r.ok) delete next[getGuestKey(r.guest)]
-        })
-        return next
-      })
-      setQuery('')
-      setResults([])
+      const confirmedNames = await Promise.all(promises)
+      const status = attending ? 'Confirmado' : 'Recusado'
+      setSuccessModal({ names: confirmedNames, status })
+      
+      setTimeout(() => {
+        setSuccessModal(null)
+        setSelected({})
+        setQuery('')
+        setResults([])
+        loadAllGuests()
+      }, 3000)
     } catch (e) {
-      setMessage('Erro ao enviar. Tente novamente.')
+      console.error('Erro ao enviar:', e)
+      setLoading(false)
     } finally {
       setLoading(false)
     }
@@ -135,15 +122,27 @@ export default function ConfirmacaoComponent() {
       )}
 
       <div className="actions">
-        <button className="confirm" onClick={() => confirm(true)}>
+        <button className="confirm" onClick={() => confirm(true)} disabled={Object.values(selected).filter(Boolean).length === 0}>
           Confirmar presença
         </button>
-        <button className="decline" onClick={() => confirm(false)}>
+        <button className="decline" onClick={() => confirm(false)} disabled={Object.values(selected).filter(Boolean).length === 0}>
           Não vai
         </button>
       </div>
 
-      {message && <div className="message">{message}</div>}
+      {successModal && (
+        <div className="success-modal">
+          <div className="modal-content">
+            <span className="modal-icon">{successModal.status === 'Confirmado' ? '✅' : '❌'}</span>
+            <h3>{successModal.status}</h3>
+            <ul className="modal-names">
+              {successModal.names.map((name, idx) => (
+                <li key={idx}>{name}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
