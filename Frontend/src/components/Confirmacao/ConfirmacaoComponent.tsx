@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './style.css'
 import { searchGuests, patchInvite, type Guest } from '../../api/guestApi'
+import { normalize } from "../../utils/normalize.ts"
 
 function getGuestKey(guest: Guest) {
   return String(guest.id)
@@ -36,9 +37,10 @@ export default function ConfirmacaoComponent() {
         setResults(allGuests)
         return
       }
+      const normalizedQuery = normalize(query)
       const filtered = allGuests.filter((g) => {
         const name = g.invitedName || ''
-        return name.toLowerCase().includes(query.toLowerCase())
+        return normalize(name).includes(normalizedQuery)
       })
       setResults(filtered)
     }, 150)
