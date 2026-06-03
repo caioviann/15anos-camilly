@@ -8,6 +8,7 @@ import SobreComponent from './components/Sobre/SobreComponent.tsx'
 import CarrosselComponent from './components/Carrossel/CarrosselComponent.tsx'
 import TimeComponent from './components/Time/TimeComponent.tsx'
 import PresentesComponent from './components/Presentes/PresentesComponent.tsx'
+import ForumComponent from './components/Forum/ForumComponent.tsx'
 
 function App() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
       <PresentesComponent />
       <ConfirmacaoComponent />
       <CarrosselComponent />
+      <ForumComponent />
     </div>
   )
 }
