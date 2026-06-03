@@ -1,0 +1,60 @@
+.info-evento {
+  margin: 24px 0;
+  padding: 22px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff9fb 0%, #fff 100%);
+  box-shadow: 0 10px 40px rgba(187, 35, 111, 0.08);
+  border: 1px solid rgba(187, 35, 111, 0.12);
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.info-evento h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: rgb(187, 35, 111);
+}
+
+.info-box,
+.schedule-box {
+  margin-bottom: 18px;
+  padding: 18px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(187, 35, 111, 0.08);
+}
+
+.info-box p {
+  margin: 0 0 12px 0;
+  line-height: 1.7;
+  color: #3d3249;
+  font-size: 16px;
+}
+
+.schedule-box h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #4d3b58;
+}
+
+.schedule-box ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.schedule-box li {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #554565;
+}
+
+.schedule-box li strong {
+  color: #b92e7a;
+}
+
+.final-note {
+  margin: 0;
+  font-size: 16px;
+  color: #4f3f55;
+  line-height: 1.8;
+}
