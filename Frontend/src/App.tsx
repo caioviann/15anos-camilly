@@ -10,6 +10,7 @@ import CarrosselComponent from './components/Carrossel/CarrosselComponent.tsx'
 import TimeComponent from './components/Time/TimeComponent.tsx'
 import PresentesComponent from './components/Presentes/PresentesComponent.tsx'
 import ForumComponent from './components/Forum/ForumComponent.tsx'
+import FooterComponent from './components/Footer/FooterComponent.tsx'
 
 function App() {
   useEffect(() => {
@@ -39,6 +40,7 @@ function App() {
       <InfoEventoComponent />
       <CarrosselComponent />
       <ForumComponent />
+      <FooterComponent />
     </div>
   )
 }
