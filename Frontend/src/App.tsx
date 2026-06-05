@@ -3,6 +3,7 @@ import './App.css'
 import EventoComponent from './components/Evento/EventoComponent.tsx'
 import LogoComponent from './components/Logo/LogoComponent.tsx'
 import ConfirmacaoComponent from './components/Confirmacao/ConfirmacaoComponent'
+import InfoEventoComponent from './components/InfoEvento/InfoEventoComponent'
 import NavbarComponent from './components/Navbar/NavbarComponent.tsx'
 import SobreComponent from './components/Sobre/SobreComponent.tsx'
 import CarrosselComponent from './components/Carrossel/CarrosselComponent.tsx'
@@ -35,6 +36,7 @@ function App() {
       <EventoComponent />
       <PresentesComponent />
       <ConfirmacaoComponent />
+      <InfoEventoComponent />
       <CarrosselComponent />
       <ForumComponent />
     </div>
